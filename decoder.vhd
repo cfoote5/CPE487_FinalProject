@@ -11,32 +11,32 @@ end decoder;
 
 architecture Behavioral of decoder is
 
-type display is array (0 to 9) of std_logic_vector (7 downto 0);
+type display is array (0 to 9) of std_logic_vector (6 downto 0);
 constant converter : display :=
-		("11000000","11111001","10100100","10110000","10011001","10010010","10000010","11111000",
-		 "10000000","10010000");
+		("1000000","1111001","0100100","0110000","0011001","0010010","0000010","1111000",
+		 "0000000","0010000");
 		 
 signal temp : std_logic_vector (7 downto 0);
 begin
 process(WhichDisplay ,temp)
 begin
     case WhichDisplay is
-         when "000" => -- Digit 1 (Hour Tens, DP OFF)
-        temp <= converter(to_integer(unsigned(digit1))) OR "10000000"; -- DP OFF
-      when "001" => -- Digit 2 (Hour Units, DP ON)
-        temp <= converter(to_integer(unsigned(digit2))) AND "01111111"; -- DP ON
-      when "010" => -- Digit 3 (Minute Tens, DP OFF)
-        temp <= converter(to_integer(unsigned(digit3))) OR "10000000"; -- DP OFF
-      when "011" => -- Digit 4 (Minute Units, DP ON)
-        temp <= converter(to_integer(unsigned(digit4))) AND "01111111"; -- DP ON
-      when "100" => -- Digit 5 (Second Tens, DP OFF)
-        temp <= converter(to_integer(unsigned(digit5))) OR "10000000"; -- DP OFF
-      when "101" => -- Digit 6 (Second Units, DP ON)
-        temp <= converter(to_integer(unsigned(digit6))) AND "01111111"; -- DP ON
-      when "110" => -- Digit 7 (Millisecond Tens, DP OFF)
-        temp <= converter(to_integer(unsigned(digit7))) OR "10000000"; -- DP OFF
-      when "111" => -- Digit 8 (Millisecond Units, DP OFF)
-        temp <= converter(to_integer(unsigned(digit8))) OR "10000000"; -- DP OFF
+         when "000" => -- Digit 1 (Millisecond Units, DP OFF)
+        temp <= '1'&converter(to_integer(unsigned(digit1))); -- DP OFF
+      when "001" => -- Digit 2 (Millisecond Tens, DP OFF)
+        temp <= '1'&converter(to_integer(unsigned(digit2))); -- DP OFF
+      when "010" => -- Digit 3 (Second Units, DP ON)
+        temp <= '0'&converter(to_integer(unsigned(digit3))); -- DP ON
+      when "011" => -- Digit 4 (Second Tens, DP OFF)
+        temp <= '1'&converter(to_integer(unsigned(digit4))); -- DP OFF
+      when "100" => -- Digit 5 (Minute Units, DP ON)
+        temp <= '0'&converter(to_integer(unsigned(digit5))); -- DP ON
+      when "101" => -- Digit 6 (Minute Tens, DP OFF)
+        temp <= '1'&converter(to_integer(unsigned(digit6))); -- DP OFF
+      when "110" => -- Digit 7 (Hour Units, DP ON)
+        temp <= '0'&converter(to_integer(unsigned(digit7))); -- DP ON
+      when "111" => -- Digit 8 (Hour Tens, DP OFF)
+        temp <= '1'&converter(to_integer(unsigned(digit8))); -- DP OFF
       when others =>
         temp <= "11111111"; -- Default: All segments off
     end case;
