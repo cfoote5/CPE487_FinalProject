@@ -21,24 +21,24 @@ begin
 process(WhichDisplay ,temp)
 begin
     case WhichDisplay is
-         when "000" => -- Digit 1 (Millisecond Units, DP OFF)
-        temp <= '1'&converter(to_integer(unsigned(digit1))); -- DP OFF
-      when "001" => -- Digit 2 (Millisecond Tens, DP OFF)
-        temp <= '1'&converter(to_integer(unsigned(digit2))); -- DP OFF
-      when "010" => -- Digit 3 (Second Units, DP ON)
-        temp <= '0'&converter(to_integer(unsigned(digit3))); -- DP ON
-      when "011" => -- Digit 4 (Second Tens, DP OFF)
-        temp <= '1'&converter(to_integer(unsigned(digit4))); -- DP OFF
-      when "100" => -- Digit 5 (Minute Units, DP ON)
-        temp <= '0'&converter(to_integer(unsigned(digit5))); -- DP ON
-      when "101" => -- Digit 6 (Minute Tens, DP OFF)
-        temp <= '1'&converter(to_integer(unsigned(digit6))); -- DP OFF
-      when "110" => -- Digit 7 (Hour Units, DP ON)
-        temp <= '0'&converter(to_integer(unsigned(digit7))); -- DP ON
-      when "111" => -- Digit 8 (Hour Tens, DP OFF)
-        temp <= '1'&converter(to_integer(unsigned(digit8))); -- DP OFF
+         when "000" => 
+        temp <= '1'&converter(to_integer(unsigned(digit1))); 
+      when "001" =>
+        temp <= '1'&converter(to_integer(unsigned(digit2))); 
+      when "010" =>
+        temp <= '0'&converter(to_integer(unsigned(digit3))); 
+      when "011" => 
+        temp <= '1'&converter(to_integer(unsigned(digit4))); 
+      when "100" => 
+        temp <= '0'&converter(to_integer(unsigned(digit5))); 
+      when "101" => 
+        temp <= '1'&converter(to_integer(unsigned(digit6))); 
+      when "110" => 
+        temp <= '0'&converter(to_integer(unsigned(digit7))); 
+      when "111" => 
+        temp <= '1'&converter(to_integer(unsigned(digit8))); 
       when others =>
-        temp <= "11111111"; -- Default: All segments off
+        temp <= "11111111"; 
     end case;
 
 end process;

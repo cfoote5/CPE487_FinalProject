@@ -38,25 +38,37 @@ begin
     if reset = '1' then
         milliseconds <= 0;
     elsif rising_edge(clk2) then
+        
         if milliseconds = 999 then
             milliseconds <= 0;
             next_seconds <= next_seconds + 1;
         else
+            if(alarm='0') then
             milliseconds <= milliseconds + 1;
+            else
+            milliseconds <= milliseconds;
+            end if;
         end if;
     end if;
 end process;
 
 process (clk1, reset, minuteadder, houradder, seconds)
 begin
-if (reset='1' OR seconds=86400) then
-seconds<=0;
-alarm_secs <= 0;
+if (reset='1' or seconds >= 86400) then
+    seconds<=0;
+--elsif(seconds > 86400) then
+--seconds<= seconds - 86400;
+
 elsif rising_edge(clk1) then 
   
-    if (alarm = '0' AND minuteadder(0)='0' AND minuteadder(1)='0' AND houradder(0)='0' AND houradder(1)='0') then --need to decide if this is how I want to do it, or case statement
+    if (alarm = '0' AND minuteadder(0)='0' AND minuteadder(1)='0' AND houradder(0)='0' AND houradder(1)='0') then
     seconds<=seconds+1;
     next_seconds <= next_seconds+1;
+      if temp_reset = 1 then
+    seconds <= reset_secs;
+    temp_reset <= 0;
+    alarm_secs <= seconds;
+      end if;  
     elsif (alarm = '1' AND minuteadder(0)='0' AND minuteadder(1)='0' AND houradder(0)='0' AND houradder(1)='0') then
     seconds <= seconds;
         if temp_reset = 0 then
@@ -65,16 +77,16 @@ elsif rising_edge(clk1) then
         end if;
     elsif (alarm = '1' AND minuteadder(0)='1' AND minuteadder(1)='0' AND houradder(0)='0' AND houradder(1)='0') then
         seconds<=seconds+60;
-        alarm_secs <= alarm_secs+seconds;
+        alarm_secs <= alarm_secs+60;
     elsif (alarm = '1' AND minuteadder(0)='0' AND minuteadder(1)='1' AND houradder(0)='0' AND houradder(1)='0') then
         seconds<=seconds+600;
-        alarm_secs <= alarm_secs+seconds;
+        alarm_secs <= alarm_secs+600;
     elsif (alarm = '1' AND minuteadder(0)='0' AND minuteadder(1)='0' AND houradder(0)='1' AND houradder(1)='0') THEN
         seconds<=seconds+3600;
-        alarm_secs <= alarm_secs+seconds;
+        alarm_secs <= alarm_secs+3600;
     elsif (alarm = '1' AND minuteadder(0)='0' AND minuteadder(1)='0' AND houradder(0)='0' AND houradder(1)='1') then
         seconds<=seconds+36000;
-        alarm_secs <= alarm_secs+seconds;
+        alarm_secs <= alarm_secs+36000;
     elsif (alarm = '0' AND minuteadder(0)='1' AND minuteadder(1)='0' AND houradder(0)='0' AND houradder(1)='0') then
         seconds<=seconds+60;
     elsif (alarm = '0' AND minuteadder(0)='0' AND minuteadder(1)='1' AND houradder(0)='0' AND houradder(1)='0') then
@@ -84,18 +96,26 @@ elsif rising_edge(clk1) then
     elsif (alarm = '0' AND minuteadder(0)='0' AND minuteadder(1)='0' AND houradder(0)='0' AND houradder(1)='1') then
         seconds<=seconds+36000;
     end if;
-  seconds <= reset_secs;
-  alarm_secs <= alarm_secs;  
  end if;
 end process;
 
 process(clk1,alarm_secs, alarm, seconds)
 begin
 if rising_edge(clk1) then   
-cnt <= cnt+1;
-    if(alarm_secs = seconds AND alarm = '0' AND cnt<delay10)then
-    LED <= x"1111";
-    cnt <= 0;
+    if(alarm_secs = seconds AND alarm = '0')then
+    LED <= x"FFFF";
+    elsif (alarm_secs + 1 =seconds AND alarm = '0') then
+    LED <= x"0000";
+    elsif (alarm_secs + 2 =seconds AND alarm = '0') then
+    LED <= x"FFFF";
+    elsif (alarm_secs + 3 =seconds AND alarm = '0') then
+    LED <= x"0000";
+    elsif (alarm_secs + 4 =seconds AND alarm = '0') then
+    LED <= x"FFFF";
+    elsif (alarm_secs + 5 =seconds AND alarm = '0') then
+    LED <= x"0000";
+    elsif (alarm_secs + 6 =seconds AND alarm = '0') then
+    LED <= x"FFFF";
     else
     LED <= x"0000";
     end if;
