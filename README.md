@@ -29,3 +29,9 @@ This sub-module actually chooses what segments are connected to ground. It does 
 
 ### ***decoder***
 This sub-module works by seeing which digit needs to be displayed on which anode using the WhichDisplay counter. It is actually choosing what segments turn on depending on the digits needed. This is also where we will be able to determine whether or not we want a decimal point after a digit.
+
+## Modifications
+### Adding Milliseconds
+Because we wanted to add milliseconds to the display, we needed to first start out by moving the original code from a 6-segment display, to an 8-segment display. To do this, we started in the sub-module "anode_picker". Here we changed the case statement for WhichDisplay (a variable that is used as a counter to decide which segment is displayed) to go up to 8 segments instead of 6. In addition, we also needed to 
+modify "mod6counter," so that instead of going to 0 after 6 digits, it went to 0 after 8 digits. We also edited "decoder" so that the "digit" inputs would go from digit8 down to digit1 instead of digit6 downto 1, these are then transported to "clock_counter" as outputs and loaded with their respective value for hours, minutes, seconds, milliseconds. Lastly, to actually implement the milliseconds function, we had to work in the "clock_counter," module. We started by making a process that used a 1 kHz clock instead of the 1 Hz clock that was used to drive the rest of the digital clock, which is used in another process in this same module. You can see the process we created here for milliseconds:
+![Milliseconds Process](https://drive.google.com/file/d/17tfaxlwK1XZZ6ODJDv1w4KVdZU5BoMVQ/view?usp=sharing)
