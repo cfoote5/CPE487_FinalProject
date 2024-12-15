@@ -5,6 +5,35 @@ a digital clock, found [here](https://www.instructables.com/Digital-Clock-in-VHD
 of the display showing tens of hours, signles of hours, tens of minutes, singles of minutes, tens of seconds and singles of seconds. Our end goal was to make changes so that we used all 8 segments of the display, added milliseconds at the end of the display,
 and separated hours, minutes, seconds and milliseconds with decimal points.
 
+## Expected Behavior
+- placeholder for video of clock counting -
+
+- The goal for our project is to create a digital clock on the Nexys A7 100T
+- The clock will count up from 0 and go for 24 hours.
+- **information on how the timer works** tbd
+- The clock should pause when the timer is being set, and remember what time it was before the timer was set.
+- When the timer goes off, the LEDs above the switches will flash.
+
+## How to setup
+### 1. Create new RTL project 24hr_clock in Vivado Quick Start
+- Create seven new source files of file type VHDL called ***counter***, ***clk_1hz***, ***clk_1khz***, ***clock_counter***, ***mod6counter***, ***anode_picker***, and ***decoder***.
+
+- Create a new constraint file of file type XDC called ***counter***.
+- Choose Nexys A7-100T board for the project
+- Click 'Finish'
+- Click design sources and copy the VHDL code from the repo.
+- Click contraints and copy the code from counter.xdc
+- As an alternative, you can instead download files from Github and import them into your project when creating the project. The source file or files would still be imported during the Source step, and the constraint file or files would still be imported during the Constraints step.
+
+### 2. Run synthesis
+### 3. Run implementation
+### 4. Generate bitstream, open hardware manager, and program device.
+- Click 'Generate Bitstream'
+- Click 'Open Hardware Manager' and click "Open Target' then 'Auto Connect'
+- Click 'Program Device' to download counter.bit to the Nexys A7-100T board.
+- TO BE ADDED -> ADD INFO ON HOW THE BOARD WORKS INITIALLY INCLUDING BUTTON INPUTS
+
+
 ## Description of the Program
 ![](https://content.instructables.com/F9P/ULZB/LDHE8OLN/F9PULZBLDHE8OLN.png?auto=webp&frame=1&width=1024&fit=bounds&md=MjAyMy0wMS0zMCAwNDo0ODo0OS4w)
 ### ***counter***
