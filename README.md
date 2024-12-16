@@ -9,7 +9,7 @@ and separated hours, minutes, seconds and milliseconds with decimal points.
 ![Demonstration](https://github.com/cfoote5/CPE487_FinalProject/blob/main/Images/Clock%20GIF%20(2).gif)
 - The goal for our project is to create a digital clock on the Nexys A7 100T
 - The clock will count up from 0 and go for 24 hours.
-- **information on how the timer works** tbd
+- The timer will be set via a toggle switch.
 - The clock should pause when the timer is being set, and remember what time it was before the timer was set.
 - When the timer goes off, the LEDs above the switches will flash.
 
