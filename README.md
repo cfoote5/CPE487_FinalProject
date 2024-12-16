@@ -6,7 +6,7 @@ of the display showing tens of hours, signles of hours, tens of minutes, singles
 and separated hours, minutes, seconds and milliseconds with decimal points.
 
 ## Expected Behavior
-![](https://youtube.com/shorts/Yl9G4mWrdGY?feature=share)
+![Demonstration](https://github.com/cfoote5/CPE487_FinalProject/blob/main/Images/Clock%20GIF%20(2).gif)
 - The goal for our project is to create a digital clock on the Nexys A7 100T
 - The clock will count up from 0 and go for 24 hours.
 - **information on how the timer works** tbd
