@@ -6,8 +6,7 @@ of the display showing tens of hours, signles of hours, tens of minutes, singles
 and separated hours, minutes, seconds and milliseconds with decimal points.
 
 ## Expected Behavior
-- placeholder for video of clock counting -
-
+![](https://youtube.com/shorts/Yl9G4mWrdGY?feature=share)
 - The goal for our project is to create a digital clock on the Nexys A7 100T
 - The clock will count up from 0 and go for 24 hours.
 - **information on how the timer works** tbd
@@ -36,7 +35,12 @@ and separated hours, minutes, seconds and milliseconds with decimal points.
 - Click 'Generate Bitstream'
 - Click 'Open Hardware Manager' and click "Open Target' then 'Auto Connect'
 - Click 'Program Device' to download counter.bit to the Nexys A7-100T board.
-- TO BE ADDED -> ADD INFO ON HOW THE BOARD WORKS INITIALLY INCLUDING BUTTON INPUTS
+- Switch J15 is the reset switch, toggling on and off will restart clock.
+- Switch L16 is the Alarm toggle switch, toggling on will allow you to set an alarm.
+- BTNU adds 10 minutes to timer.
+- BTND adds 1 minute to timer.
+- BTNR adds 10 hours to timer.
+- BTNL adds 1 hour to timer.
 
 
 ## Description of the Modules
